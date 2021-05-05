@@ -16,6 +16,11 @@ namespace Prism
         private IContainerExtension _containerExtension;
 
         /// <summary>
+        /// Gets the <see cref="INativeNavigationService"/> for the application.
+        /// </summary>
+        protected INativeNavigationService NavigationService { get; set; }
+
+        /// <summary>
         /// The dependency injection container used to resolve objects
         /// </summary>
         public IContainerProvider Container => _containerExtension;
@@ -29,28 +34,21 @@ namespace Prism
 
         private void InitializeInternal()
         {
-            //ConfigureViewModelLocator();
             Initialize();
             OnInitialized();
         }
 
         protected virtual void Initialize()
         {
-            Debug.WriteLine("Wire up container here!!!");
-
             ContainerLocator.SetContainerExtension(CreateContainerExtension);
             _containerExtension = ContainerLocator.Current;
             RegisterRequiredTypes(_containerExtension);
             RegisterTypes(_containerExtension);
             _containerExtension.FinalizeExtension();
 
-            Debug.WriteLine("Container wired up!!!");
+            _containerExtension.CreateScope();
+            NavigationService = _containerExtension.Resolve<INativeNavigationService>();
         }
-
-        //protected virtual void ConfigureViewModelLocator()
-        //{
-        //    // Not Needed?
-        //}
 
         /// <summary>
         /// Creates the container used by Prism.
@@ -70,6 +68,7 @@ namespace Prism
         protected virtual void RegisterRequiredTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IEventAggregator, EventAggregator>();
+            containerRegistry.RegisterScoped<INativeNavigationService, MacNavigationService>();
         }
 
         /// <summary>

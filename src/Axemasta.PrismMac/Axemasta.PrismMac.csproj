@@ -98,14 +98,16 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
+    <Compile Include="MyViewController.cs" />
+    <Compile Include="MyViewController.designer.cs">
+      <DependentUpon>MyViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Prism\PrismApplicationDelegate.cs" />
     <Compile Include="Prism\PrismApplicationDelegateBase.cs" />
     <Compile Include="Services\ICoolService.cs" />
     <Compile Include="Services\CoolService.cs" />
+    <Compile Include="Prism\MacNavigationService.cs" />
+    <Compile Include="Prism\INativeNavigationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

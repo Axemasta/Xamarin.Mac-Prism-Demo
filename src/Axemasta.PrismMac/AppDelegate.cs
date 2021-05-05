@@ -1,4 +1,5 @@
-﻿using AppKit;
+﻿using System.Diagnostics;
+using AppKit;
 using Axemasta.PrismMac.Services;
 using Foundation;
 using Prism;
@@ -9,10 +10,17 @@ namespace Axemasta.PrismMac
     [Register("AppDelegate")]
     public class AppDelegate : PrismApplicationDelegate
     {
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             //var coolService = Container.Resolve<ICoolService>();
             //coolService.DoSomething();
+
+            var nav = await NavigationService.NavigateAsync("MyMainWindow", this);
+
+            if (!nav.Success)
+            {
+                Debug.WriteLine($"An exception occurred navigating: {nav.Exception}");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

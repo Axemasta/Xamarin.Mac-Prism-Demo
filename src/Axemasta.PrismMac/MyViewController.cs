@@ -8,23 +8,22 @@ using Prism.Ioc;
 
 namespace Axemasta.PrismMac
 {
-    public partial class ViewController : NSViewController
+    public partial class MyViewController : NSViewController
     {
         private readonly ICoolService _coolService;
 
-        public ViewController(IntPtr handle) : base(handle)
+        public MyViewController(IntPtr handle) : base(handle)
         {
+            //TODO: Yuck, move to a view model?
             var container = AppDelegate.Current.Container;
 
             _coolService = container.Resolve<ICoolService>();
-            _coolService.DoSomething();
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            // Do any additional setup after loading the view.
             coolLabel.StringValue = "";
         }
 

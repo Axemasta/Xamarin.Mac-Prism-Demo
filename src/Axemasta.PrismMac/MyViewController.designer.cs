@@ -10,7 +10,7 @@ using System.CodeDom.Compiler;
 namespace Axemasta.PrismMac
 {
 	[Register ("ViewController")]
-	partial class ViewController
+	partial class MyViewController
 	{
 		[Outlet]
 		AppKit.NSTextField coolLabel { get; set; }
